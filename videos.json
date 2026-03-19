@@ -1,0 +1,305 @@
+{
+  "updated": "2026-03-19",
+  "drills": {
+    "half-compression": [
+      {
+        "title": "Half Swing Drill for Pure Iron Strikes",
+        "channel": "Kerrod Gray",
+        "url": "https://www.youtube.com/watch?v=ASH06DwHaRw",
+        "note": "Shows the 9-to-3 motion and how to build compression feel"
+      },
+      {
+        "title": "The BEST Drill for Consistent Ball Striking",
+        "channel": "Eric Cogorno",
+        "url": "https://www.youtube.com/watch?v=5MR7PN0QBWE",
+        "note": "Focus on hands ahead at impact — great slow-motion examples"
+      },
+      {
+        "title": "Simple Drill to Hit Irons Pure Every Time",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=kTR_G4RBnOg",
+        "note": "Emphasis on half swings building to full swings progressively"
+      }
+    ],
+    "slow-impact": [
+      {
+        "title": "Slow Motion Impact Drill — Stop Chunking",
+        "channel": "Harry Shaw Golf",
+        "url": "https://www.youtube.com/watch?v=HICQnbG9Qxk",
+        "note": "Towel version demonstrated — perfect for home practice"
+      },
+      {
+        "title": "Fix Fat Shots with This Simple Drill",
+        "channel": "Top Speed Golf",
+        "url": "https://www.youtube.com/watch?v=lK7-MCwChlc",
+        "note": "Explains why you hit behind the ball and how slow-mo fixes it"
+      },
+      {
+        "title": "Impact Position Drill for Beginners",
+        "channel": "Malaska Golf",
+        "url": "https://www.youtube.com/watch?v=K5gA3jEjmsQ",
+        "note": "Great feel-based approach — hands lead, weight forward"
+      }
+    ],
+    "gate-drill": [
+      {
+        "title": "Gate Drill — Fix Your Slice Forever",
+        "channel": "Coach Lockey",
+        "url": "https://www.youtube.com/watch?v=UB3s3tENaF4",
+        "note": "Best explanation of gate setup with alignment sticks"
+      },
+      {
+        "title": "Inside-Out Path Made Easy with the Gate Drill",
+        "channel": "Top Speed Golf",
+        "url": "https://www.youtube.com/watch?v=iXsOQ5c2GZE",
+        "note": "Shows how path changes ball flight — before and after"
+      },
+      {
+        "title": "Stop Slicing: The Gate Drill That Actually Works",
+        "channel": "Eric Cogorno",
+        "url": "https://www.youtube.com/watch?v=UPU9m88P0JA",
+        "note": "Progressions from slow to full speed — great for beginners"
+      }
+    ],
+    "pump-drill": [
+      {
+        "title": "The Pump Drill — Create Lag Instantly",
+        "channel": "Meandmygolf",
+        "url": "https://www.youtube.com/watch?v=6Bm2xbTYEq0",
+        "note": "Shows the feel of keeping wrists hinged through transition"
+      },
+      {
+        "title": "Build Lag and Stop Casting with the Pump Drill",
+        "channel": "Erika Larkin",
+        "url": "https://www.youtube.com/watch?v=LqbVwVO9WyU",
+        "note": "Slow, clear demonstration of the pump positions"
+      },
+      {
+        "title": "Pump Drill for More Distance Without Swinging Harder",
+        "channel": "Titleist",
+        "url": "https://www.youtube.com/watch?v=Hg-Z57LoaB0",
+        "note": "Focus on transition feel — hips first, then arms"
+      }
+    ],
+    "tempo-swings": [
+      {
+        "title": "Perfect Golf Tempo — The 3:1 Ratio",
+        "channel": "Meandmygolf",
+        "url": "https://www.youtube.com/watch?v=rBtVfvOZwkk",
+        "note": "Explains the 3:1 backswing-to-downswing timing"
+      },
+      {
+        "title": "How to Control Your Tempo Like a Tour Pro",
+        "channel": "Coach Lockey",
+        "url": "https://www.youtube.com/watch?v=MMbsA3UYIvs",
+        "note": "Practical counting method for consistent rhythm"
+      },
+      {
+        "title": "Stop Over-Swinging with This Tempo Drill",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=R1bPaZOm5mY",
+        "note": "Shows how 70% effort often produces better results"
+      }
+    ],
+    "wedge-ladder": [
+      {
+        "title": "Wedge Distance Control — The Ladder Drill",
+        "channel": "Titleist",
+        "url": "https://www.youtube.com/watch?v=VKm_gQiwXJA",
+        "note": "Tour-level wedge practice — clock face method"
+      },
+      {
+        "title": "Master Your Wedge Distances",
+        "channel": "Kyle Leeds",
+        "url": "https://www.youtube.com/watch?v=R2gNv_Dgq6w",
+        "note": "Practical ladder approach for amateurs"
+      },
+      {
+        "title": "Simple Wedge Drill to Lower Your Scores",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=aS5sgUPXdhw",
+        "note": "Emphasises controlling distance with backswing length"
+      }
+    ],
+    "putting-ladder": [
+      {
+        "title": "Best Putting Drill for Pace Control",
+        "channel": "Golf.com",
+        "url": "https://www.youtube.com/watch?v=L0SGI-fMVuA",
+        "note": "The ladder drill for distance control — eliminates 3-putts"
+      },
+      {
+        "title": "Putting Ladder Drill — End Three Putts",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=HgrINtXRBsg",
+        "note": "Clear demonstration with distance markers"
+      },
+      {
+        "title": "How to Control Putting Speed",
+        "channel": "Meandmygolf",
+        "url": "https://www.youtube.com/watch?v=Lr-6K0zfR6s",
+        "note": "Focus on dying the ball at the hole"
+      }
+    ],
+    "seven-iron-strike-ladder": [
+      {
+        "title": "The Strike Ladder — Best Range Drill Ever",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=C67fBFrlsoI",
+        "note": "Progressive build from chip to full swing"
+      },
+      {
+        "title": "Improve Your Ball Striking Step by Step",
+        "channel": "Meandmygolf",
+        "url": "https://www.youtube.com/watch?v=RW6gldkdP-g",
+        "note": "Earn the right to swing bigger with consistent contact"
+      },
+      {
+        "title": "7-Iron Mastery — Build Your Swing from Half",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=5L9lJhZbIx0",
+        "note": "Shows why the 7-iron is the perfect practice club"
+      }
+    ],
+    "driver-start-line": [
+      {
+        "title": "Control Driver Direction with Start Line Drill",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=HhUm43DYPO4",
+        "note": "Face angle at impact determines start line"
+      },
+      {
+        "title": "Driver Accuracy Drill — Alignment Sticks",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=qKGkbk3Eo9w",
+        "note": "Simple setup for targeting driver start direction"
+      },
+      {
+        "title": "Stop Slicing Your Driver — Start Line Focus",
+        "channel": "Matt Fryer",
+        "url": "https://www.youtube.com/watch?v=TjacgdRygCg",
+        "note": "Focus on where the ball starts, not where it finishes"
+      }
+    ],
+    "towel-strike": [
+      {
+        "title": "Towel Drill to Fix Fat Shots Instantly",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=vA1po9bceRo",
+        "note": "Clear demonstration of towel placement and why it works"
+      },
+      {
+        "title": "Stop Hitting Behind the Ball — Towel Drill",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=WVjPbfSXfwA",
+        "note": "Shows the weight shift needed for ball-first contact"
+      },
+      {
+        "title": "Chunking Fix — The Towel Behind the Ball",
+        "channel": "Top Speed Golf",
+        "url": "https://www.youtube.com/watch?v=VlSoNiA_yDk",
+        "note": "Explains low point control and how the towel trains it"
+      }
+    ],
+    "feet-together-driver": [
+      {
+        "title": "Feet Together Driver Drill — Instant Tempo Fix",
+        "channel": "Meandmygolf",
+        "url": "https://www.youtube.com/watch?v=oHMEBxz_mIc",
+        "note": "Shows how balance forces better tempo and face control"
+      },
+      {
+        "title": "Hit Driver Straight with Feet Together",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=g0NWBT_JSPI",
+        "note": "Surprisingly good contact when you can't over-swing"
+      },
+      {
+        "title": "Best Driver Drill for Beginners",
+        "channel": "Coach Lockey",
+        "url": "https://www.youtube.com/watch?v=VkSbnQfcWbI",
+        "note": "Simple and effective — no equipment needed"
+      }
+    ],
+    "alignment-path-drill": [
+      {
+        "title": "Fix Your Swing Path with Alignment Sticks",
+        "channel": "Eric Cogorno",
+        "url": "https://www.youtube.com/watch?v=3ZHgKNvcupo",
+        "note": "Best setup guide for alignment stick path training"
+      },
+      {
+        "title": "Alignment Stick Drills Every Golfer Needs",
+        "channel": "Meandmygolf",
+        "url": "https://www.youtube.com/watch?v=DMWC3OaQzZ4",
+        "note": "Multiple uses for alignment sticks in one video"
+      },
+      {
+        "title": "Swing Path Made Simple — Stick Drill",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=Pjg6aW-K6Lk",
+        "note": "Visual feedback for inside-out vs outside-in path"
+      }
+    ],
+    "nine-to-three": [
+      {
+        "title": "9-to-3 Drill — The Foundation of Good Striking",
+        "channel": "Kerrod Gray",
+        "url": "https://www.youtube.com/watch?v=lKfX-0lHeEI",
+        "note": "Shows exactly what 9 o'clock to 3 o'clock means"
+      },
+      {
+        "title": "Half Swing Compression for Pure Contact",
+        "channel": "Eric Cogorno",
+        "url": "https://www.youtube.com/watch?v=4CjVF_TElFI",
+        "note": "Demonstrates how 60% distance = pure contact benchmark"
+      },
+      {
+        "title": "Control Your Irons with 9-to-3 Swings",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=e6w-HLjBl2A",
+        "note": "Build from 9-to-3 to full swing while keeping the feel"
+      }
+    ],
+    "impact-bag-drill": [
+      {
+        "title": "Impact Bag Drill — Feel Real Compression",
+        "channel": "Malaska Golf",
+        "url": "https://www.youtube.com/watch?v=vRsCLfFTcBU",
+        "note": "Best explanation of what impact should feel like"
+      },
+      {
+        "title": "How to Use an Impact Bag Properly",
+        "channel": "Top Speed Golf",
+        "url": "https://www.youtube.com/watch?v=RkPPJiFHjwI",
+        "note": "Common mistakes with impact bag training and how to avoid them"
+      },
+      {
+        "title": "Stop Flipping — Impact Bag Training",
+        "channel": "Eric Cogorno",
+        "url": "https://www.youtube.com/watch?v=RPlS8fGjVqU",
+        "note": "Connects impact bag feel to on-course performance"
+      }
+    ],
+    "chipping-ladder": [
+      {
+        "title": "Chipping Ladder — Master Distance Control",
+        "channel": "Titleist",
+        "url": "https://www.youtube.com/watch?v=n3qV3DLAV-4",
+        "note": "Landing spot focus with multiple club choices"
+      },
+      {
+        "title": "Best Chipping Drill for Beginners",
+        "channel": "Rick Shiels",
+        "url": "https://www.youtube.com/watch?v=h7pE6Mywme0",
+        "note": "Simple progression from short to longer chips"
+      },
+      {
+        "title": "Chip Like a Pro — Landing Spot Drill",
+        "channel": "Danny Maude",
+        "url": "https://www.youtube.com/watch?v=Dn4aN-0VXHI",
+        "note": "Pick a landing spot, not an ending spot — game changer"
+      }
+    ]
+  }
+}

@@ -1,0 +1,338 @@
+/* ============================================================
+   PAGES — Tab-specific layout & styles
+   ============================================================ */
+
+/* --- Course Tab -------------------------------------------- */
+.situation-grid, .club-grid, .strategy-grid {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+
+/* Ball position visual */
+.ball-pos {
+  display: flex; align-items: flex-end; gap: 2px;
+  height: 32px; padding: var(--sp-2) 0;
+}
+.ball-pos__foot {
+  width: 12px; height: 24px; border-radius: 3px;
+  background: var(--border);
+}
+.ball-pos__ball {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent); position: relative;
+}
+.ball-pos--left .ball-pos__ball   { order: -1; align-self: center; }
+.ball-pos--center .ball-pos__ball { order: 0;  align-self: center; margin: 0 -3px; }
+.ball-pos--forward .ball-pos__ball{ order: -2; align-self: center; }
+
+/* Pre-shot routine */
+.preshot-steps {
+  display: flex; flex-direction: column; gap: 0;
+  counter-reset: step;
+}
+.preshot-step {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.preshot-step + .preshot-step { margin-top: var(--sp-2); }
+.preshot-step__num {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-light); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .875rem; font-weight: 700;
+  transition: all .2s;
+}
+.preshot-step.done .preshot-step__num {
+  background: var(--accent); color: #fff;
+}
+.preshot-step.done { opacity: .6; }
+.preshot-step__text { font-size: .9rem; font-weight: 500; flex: 1; }
+.preshot-step__check {
+  width: 20px; height: 20px; flex-shrink: 0; opacity: 0;
+  color: var(--accent); transition: opacity .2s;
+}
+.preshot-step.done .preshot-step__check { opacity: 1; }
+.preshot-reset { margin-top: var(--sp-4); }
+
+/* Course notes */
+.note-card {
+  position: relative;
+}
+.note-card__meta {
+  display: flex; gap: var(--sp-2); align-items: center;
+  margin-bottom: var(--sp-2);
+}
+.note-card__date { font-size: .75rem; color: var(--text-muted); }
+.note-card__text { font-size: .9rem; white-space: pre-wrap; }
+.note-card__delete {
+  position: absolute; top: var(--sp-3); right: var(--sp-3);
+  color: var(--text-muted); font-size: 1.1rem;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: all .2s;
+}
+.note-card__delete:hover { background: var(--danger-light); color: var(--danger); }
+
+/* --- Practice Tab ------------------------------------------ */
+.today-card {
+  background: linear-gradient(135deg, var(--accent) 0%, #2ecc71 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  margin-bottom: var(--sp-4);
+}
+.today-card h3 { color: #fff; opacity: .9; font-size: .8125rem; text-transform: uppercase; letter-spacing: .08em; }
+.today-card h2 { color: #fff; font-size: 1.25rem; margin: var(--sp-1) 0 var(--sp-2); }
+.today-card p { opacity: .9; font-size: .875rem; }
+.today-card__actions { display: flex; gap: var(--sp-2); margin-top: var(--sp-3); flex-wrap: wrap; }
+.today-card .button--primary {
+  background: rgba(255,255,255,.2); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.4);
+}
+.today-card .button--primary:hover { background: rgba(255,255,255,.3); }
+
+/* Session builder */
+.builder-form { display: flex; flex-direction: column; gap: var(--sp-3); }
+.builder-result {
+  margin-top: var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.session-block {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.session-block__order {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-light); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; font-weight: 700;
+}
+.session-block__info { flex: 1; }
+.session-block__name { font-weight: 600; font-size: .9rem; }
+.session-block__time { font-size: .8125rem; color: var(--text-muted); }
+.session-block__timer {
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-pill);
+  background: var(--accent-light); color: var(--accent);
+  font-size: .75rem; font-weight: 600;
+}
+
+/* Weekly plan */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+.week-day {
+  text-align: center;
+  padding: var(--sp-3) var(--sp-1);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all .2s;
+  min-width: 0;
+}
+.week-day.completed {
+  background: var(--accent-light); border-color: var(--accent);
+}
+.week-day.today { border-color: var(--accent); border-width: 2px; }
+.week-day__short { font-size: .6875rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+.week-day__check { font-size: 1rem; margin-top: 2px; }
+.week-day__focus { font-size: .625rem; color: var(--text-muted); margin-top: 2px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* --- Drills Tab -------------------------------------------- */
+.drill-filters {
+  display: flex; gap: var(--sp-2); flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+}
+.drill-list {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.drill-card__meta {
+  display: flex; flex-wrap: wrap; gap: var(--sp-1);
+  margin: var(--sp-2) 0;
+}
+.drill-card__steps {
+  counter-reset: step;
+  padding-left: 0;
+}
+.drill-card__steps li {
+  position: relative; padding-left: 2em; margin-bottom: var(--sp-2);
+  font-size: .875rem;
+  counter-increment: step;
+}
+.drill-card__steps li::before {
+  content: counter(step);
+  position: absolute; left: 0;
+  width: 1.5em; height: 1.5em;
+  border-radius: 50%;
+  background: var(--accent-light); color: var(--accent);
+  font-size: .75rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  top: 1px;
+}
+.drill-card__cues {
+  display: flex; flex-direction: column; gap: var(--sp-1);
+  margin-top: var(--sp-2);
+  padding: var(--sp-3);
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+}
+.drill-card__cue {
+  font-size: .8125rem; font-weight: 500; color: var(--accent-dark);
+}
+.drill-card__cue::before { content: "💡 "; }
+.drill-card__videos {
+  margin-top: var(--sp-3);
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.video-link {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: .8125rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color .2s;
+}
+.video-link:hover { border-color: var(--accent); }
+.video-link__icon { color: #c00; flex-shrink: 0; font-size: 1.2rem; }
+.video-link__info { flex: 1; min-width: 0; }
+.video-link__title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.video-link__channel { font-size: .75rem; color: var(--text-muted); }
+
+/* --- Progress Tab ------------------------------------------ */
+.session-form {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.session-log-list {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+.session-log {
+  position: relative;
+}
+.session-log__header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--sp-2);
+}
+.session-log__stats {
+  display: flex; gap: var(--sp-3); flex-wrap: wrap;
+  font-size: .8125rem;
+}
+.session-log__stat { display: flex; flex-direction: column; }
+.session-log__stat-label { font-size: .6875rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+.session-log__stat-value { font-weight: 700; color: var(--accent); }
+.session-log__notes { font-size: .875rem; color: var(--text-muted); margin-top: var(--sp-2); font-style: italic; }
+
+/* Driver goals */
+.goals-list {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+.goal-card {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  transition: all .2s;
+}
+.goal-card.active { border-color: var(--accent); }
+.goal-card.complete { border-color: var(--accent); background: var(--accent-light); }
+.goal-card__dist {
+  width: 48px; height: 48px; flex-shrink: 0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .875rem; font-weight: 700;
+  background: var(--accent-light); color: var(--accent);
+}
+.goal-card.complete .goal-card__dist { background: var(--accent); color: #fff; }
+.goal-card__info { flex: 1; }
+.goal-card__title { font-weight: 600; font-size: .9rem; }
+.goal-card__detail { font-size: .8125rem; color: var(--text-muted); }
+
+/* --- Gear Tab ---------------------------------------------- */
+.gear-grid {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.gear-card__type { margin-bottom: var(--sp-2); }
+.gear-card__budget { font-size: .8125rem; color: var(--text-muted); margin-bottom: var(--sp-2); }
+.gear-card__bullets {
+  padding-left: 1.2em;
+  font-size: .875rem;
+}
+.gear-card__bullets li { margin-bottom: var(--sp-1); }
+.gear-card__toggle {
+  margin-top: var(--sp-3);
+  display: flex; align-items: center; gap: var(--sp-2);
+  font-size: .8125rem; font-weight: 500; color: var(--text-muted);
+  cursor: pointer;
+}
+.gear-card__toggle input {
+  width: 20px; height: 20px; accent-color: var(--accent);
+}
+
+/* Yard diagram */
+.yard-diagram {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 60px);
+  gap: var(--sp-2);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  margin-top: var(--sp-3);
+}
+.yard-zone {
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: .75rem; font-weight: 600; text-align: center;
+  padding: var(--sp-2);
+}
+.yard-zone--net { background: #d4edda; color: #155724; grid-column: 1 / -1; }
+.yard-zone--mat { background: #ffeaa7; color: #856404; }
+.yard-zone--sticks { background: #dfe6e9; color: #2d3436; }
+.yard-zone--clear { background: #f8f9fa; color: #6c757d; grid-column: 1 / -1; }
+.yard-zone--storage { background: #e8daef; color: #6c3483; }
+
+/* --- Responsive -------------------------------------------- */
+@media (max-width: 640px) {
+  .page-shell {
+    width: calc(100vw - 1.5rem);
+    padding: var(--sp-3) 0 var(--sp-6);
+  }
+  .week-grid { grid-template-columns: repeat(7, 1fr); gap: var(--sp-1); }
+  .week-day { padding: var(--sp-2) 1px; }
+  .week-day__focus { display: none; }
+  .metrics-grid { gap: var(--sp-2); }
+}
+
+@media (min-width: 768px) {
+  .page-shell { --page-max: 700px; }
+  .drill-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3);
+  }
+  .drill-list .card { margin-top: 0; }
+  .gear-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3);
+  }
+  .gear-grid .card { margin-top: 0; }
+}

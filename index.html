@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1c7c54">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Mobile golf practice tips, drills, and session tracker">
+  <title>Golf Practice</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Install banner -->
+  <div id="install-banner" class="install-banner hidden" role="alert">
+    <p>Add to Home Screen for offline access on the course</p>
+    <div class="install-banner__actions">
+      <button id="install-btn" class="button button--small button--primary">Install</button>
+      <button id="install-dismiss" class="button button--small button--ghost">Dismiss</button>
+    </div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="top-bar__left">
+      <svg class="top-bar__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+      <h1 class="top-bar__title">Golf Practice</h1>
+    </div>
+    <span id="top-bar-subtitle" class="top-bar__subtitle">Course Tips</span>
+  </header>
+
+  <!-- Main content area — each tab is a panel -->
+  <main id="tab-content" class="tab-content">
+
+    <!-- COURSE TAB -->
+    <section id="tab-course" class="tab-panel active" data-tab="course">
+      <div class="page-shell">
+        <!-- Sub-navigation pills -->
+        <nav class="sub-nav" aria-label="Course tips categories">
+          <button class="pill active" data-sub="situations">Situations</button>
+          <button class="pill" data-sub="clubs">Club Tips</button>
+          <button class="pill" data-sub="preshot">Pre-Shot</button>
+          <button class="pill" data-sub="strategy">Strategy</button>
+          <button class="pill" data-sub="notes">My Notes</button>
+        </nav>
+
+        <!-- Sub-panels rendered by JS -->
+        <div id="course-situations" class="sub-panel active"></div>
+        <div id="course-clubs" class="sub-panel"></div>
+        <div id="course-preshot" class="sub-panel"></div>
+        <div id="course-strategy" class="sub-panel"></div>
+        <div id="course-notes" class="sub-panel"></div>
+      </div>
+    </section>
+
+    <!-- PRACTICE TAB -->
+    <section id="tab-practice" class="tab-panel" data-tab="practice">
+      <div class="page-shell">
+        <div id="todays-plan"></div>
+        <div id="session-builder-root"></div>
+        <div id="timer-root"></div>
+        <div id="weekly-plan-root"></div>
+      </div>
+    </section>
+
+    <!-- DRILLS TAB -->
+    <section id="tab-drills" class="tab-panel" data-tab="drills">
+      <div class="page-shell">
+        <div id="drill-filters"></div>
+        <div id="drill-grid"></div>
+      </div>
+    </section>
+
+    <!-- PROGRESS TAB -->
+    <section id="tab-progress" class="tab-panel" data-tab="progress">
+      <div class="page-shell">
+        <div id="metrics-dashboard"></div>
+        <div id="driver-goals"></div>
+        <div id="session-form-root"></div>
+        <div id="session-history"></div>
+      </div>
+    </section>
+
+    <!-- GEAR TAB -->
+    <section id="tab-gear" class="tab-panel" data-tab="gear">
+      <div class="page-shell">
+        <div id="gear-grid"></div>
+        <div id="yard-diagram-root"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Timer overlay (shown on top of any tab) -->
+  <div id="timer-overlay" class="timer-overlay hidden">
+    <div class="timer-overlay__card">
+      <button id="timer-close" class="timer-overlay__close" aria-label="Close timer">&times;</button>
+      <h3 id="timer-drill-name" class="timer-overlay__title">Timer</h3>
+      <div class="timer-circle">
+        <svg class="timer-circle__svg" viewBox="0 0 120 120">
+          <circle class="timer-circle__bg" cx="60" cy="60" r="54"/>
+          <circle id="timer-ring" class="timer-circle__ring" cx="60" cy="60" r="54"/>
+        </svg>
+        <span id="timer-display" class="timer-circle__text">05:00</span>
+      </div>
+      <div class="timer-presets">
+        <button class="pill-button" data-minutes="5">5 min</button>
+        <button class="pill-button" data-minutes="10">10 min</button>
+        <button class="pill-button" data-minutes="15">15 min</button>
+      </div>
+      <div class="timer-controls">
+        <button id="timer-start" class="button button--primary">Start</button>
+        <button id="timer-pause" class="button button--secondary hidden">Pause</button>
+        <button id="timer-reset" class="button button--ghost">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating add-note button (only visible on Course / My Notes) -->
+  <button id="fab-add-note" class="fab hidden" aria-label="Add note">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+
+  <!-- Note add/edit modal -->
+  <div id="note-modal" class="modal hidden" role="dialog" aria-label="Add note">
+    <div class="modal__backdrop"></div>
+    <div class="modal__card">
+      <h3 class="modal__title">Add Course Note</h3>
+      <form id="note-form">
+        <label class="form-label">Category
+          <select id="note-category" class="form-select" required>
+            <option value="situation">Situation</option>
+            <option value="club">Club Tip</option>
+            <option value="strategy">Strategy</option>
+            <option value="swing">Swing Thought</option>
+            <option value="general">General</option>
+          </select>
+        </label>
+        <label class="form-label">Club (optional)
+          <select id="note-club" class="form-select">
+            <option value="">—</option>
+            <option value="driver">Driver</option>
+            <option value="woods">Fairway Wood</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="long-iron">Long Iron (3-5)</option>
+            <option value="mid-iron">Mid Iron (6-7)</option>
+            <option value="short-iron">Short Iron (8-9)</option>
+            <option value="wedge">Wedge (PW/SW)</option>
+            <option value="putter">Putter</option>
+          </select>
+        </label>
+        <label class="form-label">Note
+          <textarea id="note-text" class="form-textarea" rows="3" required placeholder="What did you learn?"></textarea>
+        </label>
+        <div class="modal__actions">
+          <button type="button" id="note-cancel" class="button button--ghost">Cancel</button>
+          <button type="submit" class="button button--primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom tab bar -->
+  <nav class="tab-bar" aria-label="Main navigation">
+    <button class="tab-bar__btn active" data-tab="course" aria-label="Course Tips">
+      <svg class="tab-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+        <line x1="4" y1="22" x2="4" y2="15"/>
+      </svg>
+      <span class="tab-bar__label">Course</span>
+    </button>
+    <button class="tab-bar__btn" data-tab="practice" aria-label="Practice">
+      <svg class="tab-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+      </svg>
+      <span class="tab-bar__label">Practice</span>
+    </button>
+    <button class="tab-bar__btn" data-tab="drills" aria-label="Drills">
+      <svg class="tab-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+      <span class="tab-bar__label">Drills</span>
+    </button>
+    <button class="tab-bar__btn" data-tab="progress" aria-label="Progress">
+      <svg class="tab-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+      </svg>
+      <span class="tab-bar__label">Progress</span>
+    </button>
+    <button class="tab-bar__btn" data-tab="gear" aria-label="Gear">
+      <svg class="tab-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+      </svg>
+      <span class="tab-bar__label">Gear</span>
+    </button>
+  </nav>
+
+  <!-- Scripts (ES modules) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

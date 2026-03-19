@@ -1,0 +1,417 @@
+/* ============================================================
+   COMPONENTS — Reusable UI components
+   ============================================================ */
+
+/* --- Top Bar ----------------------------------------------- */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--top-bar-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--sp-4);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border);
+}
+.top-bar__left { display: flex; align-items: center; gap: var(--sp-2); }
+.top-bar__icon { color: var(--accent); flex-shrink: 0; }
+.top-bar__title { font-size: 1.125rem; font-weight: 700; }
+.top-bar__subtitle {
+  font-size: .8125rem; color: var(--text-muted); font-weight: 500;
+}
+
+/* --- Bottom Tab Bar ---------------------------------------- */
+.tab-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  height: var(--tab-bar-h);
+  display: flex; align-items: stretch;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.tab-bar__btn {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2px;
+  color: var(--text-muted);
+  transition: color .2s;
+  min-height: 44px;
+}
+.tab-bar__btn.active { color: var(--accent); }
+.tab-bar__icon { width: 22px; height: 22px; }
+.tab-bar__label { font-size: .6875rem; font-weight: 600; letter-spacing: .01em; }
+
+/* --- Tab Panels -------------------------------------------- */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn .2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Sub-nav (pills) --------------------------------------- */
+.sub-nav {
+  display: flex; gap: var(--sp-2);
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding: var(--sp-2) 0 var(--sp-3);
+  scrollbar-width: none;
+}
+.sub-nav::-webkit-scrollbar { display: none; }
+.sub-panel { display: none; }
+.sub-panel.active { display: block; animation: fadeIn .2s ease; }
+
+/* --- Pill / Chip ------------------------------------------- */
+.pill {
+  flex-shrink: 0;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  font-size: .8125rem; font-weight: 600;
+  background: var(--surface-solid);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  transition: all .2s;
+  white-space: nowrap;
+  min-height: 36px;
+}
+.pill.active, .pill[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.pill:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+/* --- Card -------------------------------------------------- */
+.card {
+  background: var(--surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s;
+}
+.card + .card { margin-top: var(--sp-3); }
+.card--accent { border-left: 4px solid var(--accent); }
+.card--danger { border-left: 4px solid var(--danger); }
+.card--warning{ border-left: 4px solid var(--warning); }
+.card__header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--sp-2); margin-bottom: var(--sp-2);
+}
+.card__title { font-size: 1rem; font-weight: 600; }
+.card__subtitle { font-size: .8125rem; color: var(--text-muted); }
+.card__body { font-size: .9rem; color: var(--text); }
+.card__body ul { padding-left: 1.2em; }
+.card__body li { position: relative; padding-left: .4em; margin-bottom: var(--sp-1); }
+.card__body li::before {
+  content: "•"; position: absolute; left: -.9em;
+  color: var(--accent); font-weight: 700;
+}
+
+/* Expandable card */
+.card--expandable .card__header { cursor: pointer; }
+.card--expandable .card__body { display: none; padding-top: var(--sp-3); }
+.card--expandable.open .card__body { display: block; }
+.card__chevron {
+  width: 18px; height: 18px; flex-shrink: 0;
+  transition: transform .2s; color: var(--text-muted);
+}
+.card--expandable.open .card__chevron { transform: rotate(180deg); }
+
+/* --- Buttons ----------------------------------------------- */
+.button {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-pill);
+  font-size: .875rem; font-weight: 600;
+  transition: all .2s;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.button--primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 2px 8px rgba(28,124,84,.25);
+}
+.button--primary:hover { background: var(--accent-dark); }
+.button--primary:active { transform: scale(.97); }
+
+.button--secondary {
+  background: var(--surface-solid); color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+.button--secondary:hover { background: var(--accent-light); }
+
+.button--ghost { color: var(--text-muted); }
+.button--ghost:hover { color: var(--accent); }
+
+.button--danger { background: var(--danger); color: #fff; }
+.button--danger:hover { background: #a93226; }
+
+.button--small { padding: var(--sp-2) var(--sp-3); font-size: .8125rem; min-height: 36px; }
+.button--full { width: 100%; }
+.button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* --- Pill Button (timer presets etc.) ---------------------- */
+.pill-button {
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  font-size: .8125rem; font-weight: 600;
+  background: var(--accent-light); color: var(--accent);
+  transition: all .2s;
+  min-height: 36px;
+}
+.pill-button.active, .pill-button:hover {
+  background: var(--accent); color: #fff;
+}
+
+/* --- Tags / Badges ----------------------------------------- */
+.tag {
+  display: inline-flex; align-items: center;
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius-pill);
+  font-size: .6875rem; font-weight: 600;
+  background: var(--accent-light); color: var(--accent);
+  text-transform: uppercase; letter-spacing: .03em;
+}
+.tag--orange { background: var(--warning-light); color: var(--warning); }
+.tag--red    { background: var(--danger-light);  color: var(--danger); }
+.tag--muted  { background: #eee; color: var(--text-muted); }
+.tag-row { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+
+/* --- Forms ------------------------------------------------- */
+.form-label {
+  display: flex; flex-direction: column; gap: var(--sp-1);
+  font-size: .8125rem; font-weight: 600; color: var(--text-muted);
+  margin-bottom: var(--sp-3);
+}
+.form-select, .form-input, .form-textarea {
+  padding: var(--sp-3);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface-solid);
+  font-size: .9rem;
+  transition: border-color .2s;
+  min-height: 44px;
+}
+.form-select:focus, .form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(28,124,84,.12);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-select { appearance: auto; }
+
+.form-row {
+  display: flex; gap: var(--sp-3); flex-wrap: wrap;
+}
+.form-row > * { flex: 1; min-width: 140px; }
+
+.form-chips {
+  display: flex; flex-wrap: wrap; gap: var(--sp-2);
+}
+.form-chip {
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-pill);
+  font-size: .8125rem; font-weight: 500;
+  background: var(--surface-solid);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.form-chip.selected {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Slider (strike quality) ------------------------------- */
+.range-slider {
+  -webkit-appearance: none; width: 100%; height: 6px;
+  border-radius: 3px; background: var(--border);
+  outline: none;
+}
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 24px; height: 24px;
+  border-radius: 50%; background: var(--accent);
+  cursor: pointer; box-shadow: var(--shadow-sm);
+}
+
+/* --- Timer Overlay ----------------------------------------- */
+.timer-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(4px);
+}
+.timer-overlay__card {
+  background: var(--surface-solid);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  width: min(360px, calc(100vw - 2rem));
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.timer-overlay__close {
+  position: absolute; top: var(--sp-3); right: var(--sp-3);
+  font-size: 1.5rem; color: var(--text-muted);
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+}
+.timer-overlay__title { margin-bottom: var(--sp-4); }
+
+.timer-circle { position: relative; width: 160px; height: 160px; margin: 0 auto var(--sp-4); }
+.timer-circle__svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.timer-circle__bg {
+  fill: none; stroke: var(--border); stroke-width: 6;
+}
+.timer-circle__ring {
+  fill: none; stroke: var(--accent); stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 339.292;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset .5s linear;
+}
+.timer-circle__text {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+
+.timer-presets { display: flex; gap: var(--sp-2); justify-content: center; margin-bottom: var(--sp-4); }
+.timer-controls { display: flex; gap: var(--sp-2); justify-content: center; }
+
+/* --- FAB (Floating Action Button) -------------------------- */
+.fab {
+  position: fixed;
+  bottom: calc(var(--tab-bar-h) + var(--sp-4) + env(safe-area-inset-bottom, 0px));
+  right: var(--sp-4);
+  z-index: 90;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform .2s, box-shadow .2s;
+}
+.fab:hover { transform: scale(1.05); }
+.fab:active { transform: scale(.95); }
+
+/* --- Modal ------------------------------------------------- */
+.modal {
+  position: fixed; inset: 0; z-index: 300;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.modal__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(4px);
+}
+.modal__card {
+  position: relative; z-index: 1;
+  background: var(--surface-solid);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--sp-6);
+  width: 100%;
+  max-width: var(--page-max);
+  max-height: 85dvh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp .25s ease;
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.modal__title { margin-bottom: var(--sp-4); }
+.modal__actions { display: flex; gap: var(--sp-2); justify-content: flex-end; margin-top: var(--sp-4); }
+
+/* --- Install Banner ---------------------------------------- */
+.install-banner {
+  position: fixed; top: var(--top-bar-h); left: 0; right: 0; z-index: 99;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-3); flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--accent-light);
+  border-bottom: 1px solid var(--accent);
+  font-size: .8125rem; font-weight: 500; color: var(--accent-dark);
+}
+.install-banner__actions { display: flex; gap: var(--sp-2); }
+
+/* --- Progress Bar / Goal Meter ----------------------------- */
+.goal-meter {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: var(--sp-2);
+}
+.goal-meter__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #2ecc71);
+  border-radius: 4px;
+  transition: width .6s ease;
+}
+
+/* --- Metrics Grid ------------------------------------------ */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  text-align: center;
+}
+.metric-card__value {
+  font-size: 1.5rem; font-weight: 700; color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.metric-card__label { font-size: .75rem; color: var(--text-muted); font-weight: 500; }
+
+/* --- Section Header ---------------------------------------- */
+.section-header {
+  margin-bottom: var(--sp-4);
+}
+.section-header .eyebrow {
+  font-size: .6875rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--accent); margin-bottom: var(--sp-1);
+}
+.section-header h2 { margin-bottom: var(--sp-1); }
+.section-header .section-copy { font-size: .875rem; color: var(--text-muted); }
+
+/* --- Checklist --------------------------------------------- */
+.checklist-item {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .9rem;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item input[type="checkbox"] {
+  width: 22px; height: 22px; flex-shrink: 0;
+  accent-color: var(--accent);
+}
+.checklist-item.done { text-decoration: line-through; color: var(--text-muted); }
+
+/* --- Empty State ------------------------------------------- */
+.empty-state {
+  text-align: center;
+  padding: var(--sp-10) var(--sp-4);
+  color: var(--text-muted);
+}
+.empty-state__icon { font-size: 2.5rem; margin-bottom: var(--sp-3); opacity: .5; }
+.empty-state__text { font-size: .9rem; }
+
+/* --- Chevron SVG (used in expandable cards) ---------------- */
+.chevron-svg {
+  width: 18px; height: 18px;
+  transition: transform .2s;
+}
+.open > .card__header .chevron-svg {
+  transform: rotate(180deg);
+}
