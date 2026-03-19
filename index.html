@@ -34,7 +34,16 @@
       <svg class="top-bar__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
       <h1 class="top-bar__title">Golf Practice</h1>
     </div>
-    <span id="top-bar-subtitle" class="top-bar__subtitle">Course Tips</span>
+    <div class="top-bar__right">
+      <span id="top-bar-subtitle" class="top-bar__subtitle">Course Tips</span>
+      <span id="sync-indicator" class="sync-indicator hidden" title="Synced to cloud">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      <button id="auth-btn" class="auth-btn" title="Sign in to sync">
+        <svg id="auth-icon" class="auth-btn__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <img id="auth-avatar" class="auth-btn__avatar hidden" width="28" height="28" alt="" />
+      </button>
+    </div>
   </header>
 
   <!-- Main content area — each tab is a panel -->

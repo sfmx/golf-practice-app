@@ -3,7 +3,7 @@
    for videos.json. Enables full offline support.
    ============================================================ */
 
-const CACHE_NAME = 'golf-practice-v1';
+const CACHE_NAME = 'golf-practice-v2';
 const SHELL_ASSETS = [
   './',
   './index.html',
@@ -14,6 +14,7 @@ const SHELL_ASSETS = [
   './js/app.js',
   './js/data.js',
   './js/storage.js',
+  './js/firebase.js',
   './js/components/timer.js',
   './js/components/session-builder.js',
   './js/pages/course.js',
@@ -62,6 +63,15 @@ self.addEventListener('fetch', event => {
         .catch(() => caches.match(event.request))
     );
     return;
+  }
+
+  // Skip caching for Firebase / Google APIs
+  if (url.hostname.includes('googleapis.com') ||
+      url.hostname.includes('gstatic.com') ||
+      url.hostname.includes('firebaseapp.com') ||
+      url.hostname.includes('firebaseio.com') ||
+      url.hostname.includes('google.com')) {
+    return; // Let the browser handle these normally
   }
 
   // Cache-first for everything else

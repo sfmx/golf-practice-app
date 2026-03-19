@@ -1,6 +1,8 @@
 /* ============================================================
    STORAGE — localStorage wrapper with namespaced keys
+   + Firestore cloud sync when signed in
    ============================================================ */
+import { syncToCloud, getUser } from './firebase.js';
 
 const PREFIX = 'gp-';
 
@@ -17,6 +19,11 @@ export function save(name, value) {
   try {
     localStorage.setItem(key(name), JSON.stringify(value));
   } catch { /* quota exceeded — silently fail */ }
+
+  // Fire-and-forget sync to Firestore if signed in
+  if (getUser()) {
+    syncToCloud(name, value).catch(() => {});
+  }
 }
 
 export function remove(name) {

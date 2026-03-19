@@ -1,5 +1,5 @@
 /* ============================================================
-   APP — Entry point, tab routing, PWA install
+   APP — Entry point, tab routing, PWA install, Firebase auth
    ============================================================ */
 import { tabLabels } from './data.js';
 import { loadPrefs, savePrefs } from './storage.js';
@@ -9,6 +9,7 @@ import { initPractice } from './pages/practice.js';
 import { initLibrary } from './pages/library.js';
 import { initProgress } from './pages/progress.js';
 import { initGear } from './pages/gear.js';
+import { initFirebase, signIn, signOut, getUser, fullSync } from './firebase.js';
 
 /* ── Tab Routing ────────────────────────────────────────── */
 const tabBtns = document.querySelectorAll('.tab-bar__btn');
@@ -89,6 +90,65 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
+/* ── Firebase Auth UI ────────────────────────────────────── */
+const authBtn = document.getElementById('auth-btn');
+const authIcon = document.getElementById('auth-icon');
+const authAvatar = document.getElementById('auth-avatar');
+const syncIndicator = document.getElementById('sync-indicator');
+
+function updateAuthUI(user) {
+  if (user) {
+    // Signed in — show avatar
+    authIcon.classList.add('hidden');
+    authAvatar.classList.remove('hidden');
+    authAvatar.src = user.photoURL || '';
+    authAvatar.alt = user.displayName || 'User';
+    authBtn.title = `Signed in as ${user.displayName || user.email}. Tap to sign out.`;
+    syncIndicator.classList.remove('hidden');
+  } else {
+    // Signed out — show person icon
+    authIcon.classList.remove('hidden');
+    authAvatar.classList.add('hidden');
+    authAvatar.src = '';
+    authBtn.title = 'Sign in to sync';
+    syncIndicator.classList.add('hidden');
+  }
+}
+
+async function handleAuthStateChange(user) {
+  updateAuthUI(user);
+  if (user) {
+    // Sync data with cloud, then refresh UI
+    showSyncing();
+    await fullSync();
+    hideSyncing();
+    // Re-init pages to pick up synced data
+    initCourse();
+    initPractice();
+    initProgress();
+    initGear();
+  }
+}
+
+function showSyncing() {
+  syncIndicator.classList.remove('hidden');
+  syncIndicator.classList.add('syncing');
+}
+
+function hideSyncing() {
+  syncIndicator.classList.remove('syncing');
+}
+
+authBtn?.addEventListener('click', async () => {
+  if (getUser()) {
+    if (confirm('Sign out? Your data stays on this device but won\'t sync until you sign back in.')) {
+      await signOut();
+    }
+  } else {
+    await signIn();
+  }
+});
+
 /* ── Init ───────────────────────────────────────────────── */
 async function init() {
   initTimer();
@@ -98,6 +158,11 @@ async function init() {
   initProgress();
   initGear();
   handleHash();
+
+  // Initialize Firebase (non-blocking — loads SDK async)
+  initFirebase(handleAuthStateChange).catch(err => {
+    console.warn('Firebase init failed (offline?):', err.message);
+  });
 }
 
 init();
