@@ -139,7 +139,7 @@
 }
 
 /* Expandable card */
-.card--expandable .card__header { cursor: pointer; }
+.card--expandable .card__header { cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,.08); }
 .card--expandable .card__body { display: none; padding-top: var(--sp-3); }
 .card--expandable.open .card__body { display: block; }
 .card__chevron {

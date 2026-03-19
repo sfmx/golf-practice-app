@@ -22,6 +22,8 @@ export function initCourse() {
 /* ── Sub-navigation ─────────────────────────────────────── */
 function initSubNav() {
   const nav = document.querySelector('#tab-course .sub-nav');
+  if (nav._listenerAdded) return;
+  nav._listenerAdded = true;
   nav.addEventListener('click', e => {
     const pill = e.target.closest('.pill');
     if (!pill) return;
@@ -253,6 +255,8 @@ function renderNotes() {
 /* ── FAB & Modal ────────────────────────────────────────── */
 function initFab() {
   const fab = document.getElementById('fab-add-note');
+  if (fab._listenerAdded) return;
+  fab._listenerAdded = true;
   fab.addEventListener('click', () => {
     document.getElementById('note-modal').classList.remove('hidden');
   });
@@ -260,6 +264,8 @@ function initFab() {
 
 function initNoteModal() {
   const modal = document.getElementById('note-modal');
+  if (modal._listenerAdded) return;
+  modal._listenerAdded = true;
   const form = document.getElementById('note-form');
 
   modal.querySelector('.modal__backdrop').addEventListener('click', () => modal.classList.add('hidden'));
@@ -288,6 +294,8 @@ function initNoteModal() {
 
 /* ── Helpers ─────────────────────────────────────────────── */
 function addExpandListeners(container) {
+  if (container._expandListenerAdded) return;
+  container._expandListenerAdded = true;
   container.addEventListener('click', e => {
     const header = e.target.closest('.card--expandable .card__header');
     if (!header) return;

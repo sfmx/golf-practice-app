@@ -147,19 +147,22 @@ function renderDrills() {
     </div>
   `;
 
-  // Expand/collapse
-  el.addEventListener('click', e => {
-    const header = e.target.closest('.card--expandable .card__header');
-    if (header) {
-      header.closest('.card--expandable').classList.toggle('open');
-      return;
-    }
-    // Timer button
-    const timerBtn = e.target.closest('.drill-timer-btn');
-    if (timerBtn) {
-      const drill = drills.find(d => d.id === timerBtn.dataset.drillId);
-      const mins = parseInt(timerBtn.dataset.minutes, 10);
-      openTimer(mins * 60, drill?.title || 'Drill');
-    }
-  });
+  // Expand/collapse + Timer (guard against duplicate listeners)
+  if (!el._drillListenerAdded) {
+    el._drillListenerAdded = true;
+    el.addEventListener('click', e => {
+      const header = e.target.closest('.card--expandable .card__header');
+      if (header) {
+        header.closest('.card--expandable').classList.toggle('open');
+        return;
+      }
+      // Timer button
+      const timerBtn = e.target.closest('.drill-timer-btn');
+      if (timerBtn) {
+        const drill = drills.find(d => d.id === timerBtn.dataset.drillId);
+        const mins = parseInt(timerBtn.dataset.minutes, 10);
+        openTimer(mins * 60, drill?.title || 'Drill');
+      }
+    });
+  }
 }

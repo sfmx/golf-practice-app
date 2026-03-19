@@ -3,7 +3,7 @@
    for videos.json. Enables full offline support.
    ============================================================ */
 
-const CACHE_NAME = 'golf-practice-v2';
+const CACHE_NAME = 'golf-practice-v3';
 const SHELL_ASSETS = [
   './',
   './index.html',
@@ -74,19 +74,19 @@ self.addEventListener('fetch', event => {
     return; // Let the browser handle these normally
   }
 
-  // Cache-first for everything else
+  // Stale-while-revalidate for everything else
+  // Serve cached version instantly, then update cache from network in background
   event.respondWith(
-    caches.match(event.request)
-      .then(cached => {
-        if (cached) return cached;
-        return fetch(event.request).then(res => {
-          // Cache successful GET responses for same-origin requests
+    caches.open(CACHE_NAME).then(cache =>
+      cache.match(event.request).then(cached => {
+        const networkFetch = fetch(event.request).then(res => {
           if (res.ok && event.request.method === 'GET' && url.origin === self.location.origin) {
-            const clone = res.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+            cache.put(event.request, res.clone());
           }
           return res;
         });
+        return cached || networkFetch;
       })
+    )
   );
 });
