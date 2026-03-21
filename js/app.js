@@ -11,6 +11,8 @@ import { initProgress } from './pages/progress.js';
 import { initGear } from './pages/gear.js';
 import { initFirebase, signIn, signOut, getUser, fullSync } from './firebase.js';
 
+const APP_VERSION = '1.1.0';
+
 /* ── Tab Routing ────────────────────────────────────────── */
 const tabBtns = document.querySelectorAll('.tab-bar__btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
@@ -149,6 +151,18 @@ authBtn?.addEventListener('click', async () => {
   }
 });
 
+/* ── About Modal ─────────────────────────────────────────── */
+const aboutBtn = document.getElementById('about-btn');
+const aboutModal = document.getElementById('about-modal');
+
+aboutBtn?.addEventListener('click', () => {
+  document.getElementById('about-version').textContent = `Version ${APP_VERSION}`;
+  document.getElementById('about-cache').textContent = `SW Cache: golf-practice-v6`;
+  aboutModal.classList.remove('hidden');
+});
+document.getElementById('about-close')?.addEventListener('click', () => aboutModal.classList.add('hidden'));
+aboutModal?.querySelector('.modal__backdrop')?.addEventListener('click', () => aboutModal.classList.add('hidden'));
+
 /* ── Init ───────────────────────────────────────────────── */
 async function init() {
   initTimer();
@@ -163,6 +177,8 @@ async function init() {
   initFirebase(handleAuthStateChange).catch(err => {
     console.warn('Firebase init failed (offline?):', err.message);
   });
+
+  console.log(`Golf Practice v${APP_VERSION} loaded`);
 }
 
 init();

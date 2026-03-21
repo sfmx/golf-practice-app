@@ -31,7 +31,9 @@
   <!-- Top bar -->
   <header class="top-bar">
     <div class="top-bar__left">
-      <svg class="top-bar__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+      <button id="about-btn" class="top-bar__icon-btn" title="About" style="background:none;border:none;cursor:pointer;padding:0;display:flex">
+        <svg class="top-bar__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+      </button>
       <h1 class="top-bar__title">Golf Practice</h1>
     </div>
     <div class="top-bar__right">
@@ -215,6 +217,23 @@
       <span class="tab-bar__label">Gear</span>
     </button>
   </nav>
+
+  <!-- About modal -->
+  <div id="about-modal" class="modal hidden" role="dialog" aria-label="About">
+    <div class="modal__backdrop"></div>
+    <div class="modal__card">
+      <h3 class="modal__title">Golf Practice</h3>
+      <div style="text-align:center;padding:var(--sp-3) 0">
+        <div style="font-size:2rem;margin-bottom:var(--sp-2)">⛳</div>
+        <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:var(--sp-2)">Your personal golf practice companion</p>
+        <p id="about-version" style="font-size:.8125rem;font-weight:600;color:var(--accent)"></p>
+        <p id="about-cache" style="font-size:.75rem;color:var(--text-muted);margin-top:var(--sp-1)"></p>
+      </div>
+      <div class="modal__actions" style="justify-content:center">
+        <button type="button" id="about-close" class="button button--primary">OK</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts (ES modules) -->
   <script type="module" src="js/app.js"></script>

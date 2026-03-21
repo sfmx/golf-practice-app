@@ -3,7 +3,7 @@
    for videos.json. Enables full offline support.
    ============================================================ */
 
-const CACHE_NAME = 'golf-practice-v5';
+const CACHE_NAME = 'golf-practice-v6';
 const SHELL_ASSETS = [
   './',
   './index.html',
