@@ -7,6 +7,58 @@
   display: flex; flex-direction: column; gap: var(--sp-3);
 }
 
+/* Back button */
+.back-btn {
+  display: inline-flex; align-items: center; gap: var(--sp-1);
+  font-size: .875rem; font-weight: 600; color: var(--accent);
+  background: none; border: none; cursor: pointer;
+  padding: var(--sp-2) 0; margin-bottom: var(--sp-3);
+  transition: opacity .2s;
+}
+.back-btn:hover { opacity: .7; }
+.back-btn svg { flex-shrink: 0; }
+
+/* Course selector */
+.course-select-grid {
+  display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.course-select-card {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-4);
+  text-align: left; cursor: pointer;
+  border: 1.5px solid var(--border);
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+.course-select-card:hover, .course-select-card:focus-visible {
+  border-color: var(--accent); box-shadow: var(--shadow);
+}
+.course-select-card__icon {
+  font-size: 1.75rem; flex-shrink: 0;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-light); border-radius: 50%;
+}
+.course-select-card__info {
+  flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+.course-select-card__name {
+  font-weight: 700; font-size: 1rem; color: var(--text);
+}
+.course-select-card__detail {
+  font-size: .8125rem; color: var(--text-muted); font-weight: 500;
+}
+.course-select-card__location {
+  font-size: .75rem; color: var(--text-muted);
+}
+.course-select-card__arrow {
+  flex-shrink: 0; color: var(--text-muted);
+  transition: transform .2s;
+}
+.course-select-card:hover .course-select-card__arrow {
+  transform: translateX(2px); color: var(--accent);
+}
+
 /* Club distance legend */
 .club-dist-legend {
   display: flex; flex-wrap: wrap; gap: var(--sp-2);
