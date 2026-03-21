@@ -1,12 +1,57 @@
 /* ============================================================
    GEAR — Equipment guide & backyard setup diagram
    ============================================================ */
-import { gear } from '../data.js';
-import { loadGearOwned, saveGearOwned, esc } from '../storage.js';
+import { gear, defaultClubDistances } from '../data.js';
+import { loadGearOwned, saveGearOwned, loadClubDistances, saveClubDistances, esc } from '../storage.js';
 
 export function initGear() {
+  renderMyClubs();
   renderGear();
   renderYardDiagram();
+}
+
+/* ── My Clubs (editable distances) ──────────────────────── */
+function renderMyClubs() {
+  const el = document.getElementById('my-clubs-root');
+  const clubs = loadClubDistances() || defaultClubDistances;
+
+  el.innerHTML = `
+    <div class="section-header">
+      <div class="eyebrow">Your Bag</div>
+      <h2>My Clubs</h2>
+      <p class="section-copy">Update distances as you improve. These are used in the Hole Guide.</p>
+    </div>
+    <div class="my-clubs-list">
+      ${clubs.map((c, i) => `
+        <div class="my-club-row">
+          <span class="my-club-row__name">${esc(c.club)}</span>
+          <div class="my-club-row__input-wrap">
+            <input type="number" class="my-club-row__input" data-club-index="${i}" value="${c.distance}" min="0" max="400" inputmode="numeric" />
+            <span class="my-club-row__unit">m</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="my-clubs-actions">
+      <button id="clubs-reset" class="button button--ghost button--small">Reset to Defaults</button>
+    </div>
+  `;
+
+  // Save on input change
+  el.addEventListener('input', e => {
+    const input = e.target.closest('.my-club-row__input');
+    if (!input) return;
+    const idx = parseInt(input.dataset.clubIndex, 10);
+    const current = loadClubDistances() || [...defaultClubDistances.map(c => ({...c}))];
+    current[idx].distance = parseInt(input.value, 10) || 0;
+    saveClubDistances(current);
+  });
+
+  // Reset to defaults
+  el.querySelector('#clubs-reset').addEventListener('click', () => {
+    saveClubDistances(null);
+    renderMyClubs();
+  });
 }
 
 function renderGear() {
