@@ -69,6 +69,14 @@ export function saveGearOwned(ids)    { save('gear-owned', ids); }
 export function loadGoals()       { return load('goals', null); }
 export function saveGoals(goals)  { save('goals', goals); }
 
+// Club distances (editable)
+export function loadClubDistances() {
+  return load('club-distances', null);
+}
+export function saveClubDistances(clubs) {
+  save('club-distances', clubs);
+}
+
 // User preferences
 export function loadPrefs()       { return load('prefs', { lastTab: 'course' }); }
 export function savePrefs(prefs)  { save('prefs', prefs); }

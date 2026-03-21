@@ -705,6 +705,217 @@ export const courseManagement = [
   }
 ];
 
+// ── Default Club Distances ─────────────────────────────────
+export const defaultClubDistances = [
+  { club: 'Driver',    distance: 180 },
+  { club: 'FW',        distance: 130 },
+  { club: '5 Hybrid',  distance: 120 },
+  { club: '6i',        distance: 110 },
+  { club: '7i',        distance: 95  },
+  { club: '8i',        distance: 85  },
+  { club: '9i',        distance: 75  },
+  { club: 'PW',        distance: 60  },
+  { club: 'SW',        distance: 50  }
+];
+
+// ── Courses ────────────────────────────────────────────────
+export const courses = [
+  {
+    id: 'gainsborough-white',
+    name: 'Gainsborough Greens',
+    tees: 'White',
+    location: 'Pimpama, QLD',
+    par: 72,
+    totalDistance: 2851,
+    slope: 126,
+    scr: 72,
+    holes: [
+  {
+    hole: 1, par: 4, distance: 289, index: 4,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 109 },
+      { club: '6i',      carry: 110, remaining: 0   }
+    ],
+    strategy: 'Solid opening par chance. Driver to the fairway, then a full 6-iron should reach the green.',
+    tip: 'Aim centre of fairway — don\'t try to cut the corner. A 6i slightly short is fine; chip and putt for par.',
+    bogeyPlan: 'If the 6i comes up short, a simple chip and two-putt still makes bogey.'
+  },
+  {
+    hole: 2, par: 3, distance: 155, index: 7,
+    shots: [
+      { club: 'FW',  carry: 130, remaining: 25 }
+    ],
+    strategy: 'No club perfectly fits 155m. Fairway wood to the front, then chip on. Driver risks going long.',
+    tip: 'Fairway wood aimed at the front of the green is the safe play. A 25m chip and two-putt = bogey.',
+    bogeyPlan: 'FW to the front apron, chip close, two-putt. Avoid the driver unless you\'re confident with a smooth swing.'
+  },
+  {
+    hole: 3, par: 5, distance: 486, index: 13,
+    shots: [
+      { club: 'Driver',    carry: 180, remaining: 306 },
+      { club: 'FW',        carry: 130, remaining: 176 },
+      { club: '5 Hybrid',  carry: 120, remaining: 56  },
+      { club: 'SW',        carry: 50,  remaining: 6   }
+    ],
+    strategy: 'A true 4-shot hole at your distances. Driver → FW → 5 Hybrid → SW to the green.',
+    tip: 'Don\'t force heroics. Play three solid shots to get within wedge range, then land a SW close for a one-putt bogey or two-putt double.',
+    bogeyPlan: 'Keep each shot in play. Even a topped hybrid still gets you closer. SW from 50-60m is a great scoring zone.'
+  },
+  {
+    hole: 4, par: 4, distance: 334, index: 15,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 154 },
+      { club: 'FW',      carry: 130, remaining: 24  }
+    ],
+    strategy: 'Driver leaves 154m — in the gap between FW and driver. Play FW to short of the green, then chip on.',
+    tip: 'FW from 154m will leave 24m short, a comfortable chip. Don\'t try to force a driver off the deck.',
+    bogeyPlan: 'Driver, FW short of green, chip and two-putt. The chip is the scoring shot here.'
+  },
+  {
+    hole: 5, par: 4, distance: 362, index: 2,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 182 },
+      { club: 'FW',      carry: 130, remaining: 52  },
+      { club: 'SW',      carry: 50,  remaining: 2   }
+    ],
+    strategy: 'Second hardest hole. Driver → FW → SW to the green. This plays as a par 5 for you.',
+    tip: 'Treat it as a 3-shot approach. After Driver + FW, you\'re left with a comfortable SW distance.',
+    bogeyPlan: 'Bogey is a great score here. Keep the driver in the fairway and the FW advancing, then let your SW get you on the green.'
+  },
+  {
+    hole: 6, par: 4, distance: 415, index: 16,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 235 },
+      { club: 'FW',      carry: 130, remaining: 105 },
+      { club: '6i',      carry: 110, remaining: 0   }
+    ],
+    strategy: 'Very tough par 4 — plays as a par 5+. Driver → FW → 6-iron to the green. Three good shots needed.',
+    tip: 'High index hole so expect bogey at best. Just keep each shot in the fairway and advancing. A 6i to the green on your third is the highlight.',
+    bogeyPlan: 'Even a double bogey is acceptable here. Stay out of trouble and keep it simple.'
+  },
+  {
+    hole: 7, par: 3, distance: 182, index: 3,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 2 }
+    ],
+    strategy: 'Your driver distance matches perfectly! Aim for the centre of the green.',
+    tip: 'This is a driver par 3. Focus on a smooth swing — centre contact at 180m is right on it.',
+    bogeyPlan: 'If you miss the green, you\'re likely near it. A chip and two-putt = bogey on a tough par 3.'
+  },
+  {
+    hole: 8, par: 4, distance: 347, index: 1,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 167 },
+      { club: 'FW',      carry: 130, remaining: 37  }
+    ],
+    strategy: 'Hardest hole on the course. Driver → FW leaves 37m — a pitch with your SW or PW.',
+    tip: 'Don\'t let the index intimidate you. Just advance the ball sensibly. After Driver + FW, a 37m pitch is very manageable.',
+    bogeyPlan: 'Bogey is a WIN. Driver, FW, pitch on, two-putt. Keep it in play off the tee.'
+  },
+  {
+    hole: 9, par: 4, distance: 281, index: 11,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 101 },
+      { club: '7i',      carry: 95,  remaining: 6   }
+    ],
+    strategy: 'Great par chance to finish the front nine! Driver leaves 101m — a full 7-iron gets you close.',
+    tip: '7-iron leaves maybe 6m short — that\'s pin high chip range or a putt from the fringe. Go for it!',
+    bogeyPlan: 'Even if the 7i is a bit short, a chip and putt from close range is a stress-free bogey.'
+  },
+  {
+    hole: 10, par: 4, distance: 252, index: 18,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 72 },
+      { club: '9i',      carry: 75,  remaining: 0  }
+    ],
+    strategy: 'Easiest hole on the course! Driver → 9-iron to the green. Best birdie/par chance.',
+    tip: 'Driver to the fairway, then a 9-iron right at the flag. This is where you can score.',
+    bogeyPlan: 'Even a slightly miss-hit 9i gets you on or near the green. Two-putt par is very achievable.'
+  },
+  {
+    hole: 11, par: 5, distance: 454, index: 17,
+    shots: [
+      { club: 'Driver',    carry: 180, remaining: 274 },
+      { club: 'FW',        carry: 130, remaining: 144 },
+      { club: '5 Hybrid',  carry: 120, remaining: 24  }
+    ],
+    strategy: 'Driver → FW → 5 Hybrid gets you to 24m short. Chip on for a bogey chance.',
+    tip: 'Three good shots leaves a simple chip. This is a scoreable par 5 if you keep it in play.',
+    bogeyPlan: 'Driver, FW, Hybrid, chip, two-putt. Steady progression wins here.'
+  },
+  {
+    hole: 12, par: 4, distance: 318, index: 6,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 138 },
+      { club: 'FW',      carry: 130, remaining: 8   }
+    ],
+    strategy: 'Driver → FW leaves just 8m short. You could be putting from the fringe!',
+    tip: 'A clean FW from 138m gets you right to the green\'s edge. Great chance for a par with a good chip or long putt.',
+    bogeyPlan: 'If the FW comes up a bit short, a small chip and two-putt is easy bogey.'
+  },
+  {
+    hole: 13, par: 4, distance: 302, index: 8,
+    shots: [
+      { club: 'Driver',    carry: 180, remaining: 122 },
+      { club: '5 Hybrid',  carry: 120, remaining: 2   }
+    ],
+    strategy: 'Driver → 5 Hybrid is almost perfectly on distance! Great par opportunity.',
+    tip: '5 Hybrid from 122m is just 2m over your carry distance. Aim for the centre of the green and let it land.',
+    bogeyPlan: 'Even a slightly thin hybrid gets you close. Chip and putt from anywhere near the green.'
+  },
+  {
+    hole: 14, par: 3, distance: 150, index: 12,
+    shots: [
+      { club: 'FW',  carry: 130, remaining: 20 }
+    ],
+    strategy: 'Similar to hole 2 — FW lands 20m short, then chip on. Safer than swinging hard with a driver.',
+    tip: 'FW to the front of the green is the smart play. A 20m chip and two-putt = solid bogey.',
+    bogeyPlan: 'If you\'re feeling confident, a smooth 80% driver could work, but FW + chip is the safer play.'
+  },
+  {
+    hole: 15, par: 4, distance: 302, index: 5,
+    shots: [
+      { club: 'Driver',    carry: 180, remaining: 122 },
+      { club: '5 Hybrid',  carry: 120, remaining: 2   }
+    ],
+    strategy: 'Same as hole 13 — Driver → 5 Hybrid fits perfectly. Another scoring hole!',
+    tip: 'Commit to a smooth hybrid swing. You only need 122m and the hybrid carries 120m. Trust it.',
+    bogeyPlan: 'If the hybrid doesn\'t fly full distance, you\'re still close. Chip and putt.'
+  },
+  {
+    hole: 16, par: 3, distance: 168, index: 10,
+    shots: [
+      { club: 'FW',  carry: 130, remaining: 38 }
+    ],
+    strategy: '168m is in the gap. FW leaves 38m — a comfortable pitch. Driver could fly long.',
+    tip: 'Play FW to shy of the green, then pitch with your SW or PW. Two-putt for bogey.',
+    bogeyPlan: 'If you\'re feeling your driver, an easy 90% swing could reach. But FW + pitch is the smart play.'
+  },
+  {
+    hole: 17, par: 5, distance: 443, index: 9,
+    shots: [
+      { club: 'Driver',    carry: 180, remaining: 263 },
+      { club: 'FW',        carry: 130, remaining: 133 },
+      { club: 'FW',        carry: 130, remaining: 3   }
+    ],
+    strategy: 'Driver → FW → FW again! Two fairway woods gets you to just 3m from the green.',
+    tip: 'This is a three-shot par 5 that\'s very reachable. The second FW from 133m is right in your wheelhouse.',
+    bogeyPlan: 'If the second FW comes up a bit short, a tiny chip and two-putt still makes par or bogey.'
+  },
+  {
+    hole: 18, par: 4, distance: 275, index: 14,
+    shots: [
+      { club: 'Driver',  carry: 180, remaining: 95 },
+      { club: '7i',      carry: 95,  remaining: 0  }
+    ],
+    strategy: 'Great finishing hole! Driver → 7-iron is a perfect fit. Finish the round strong.',
+    tip: '95m is exactly your 7-iron distance. A solid drive and a confident 7i could find the green.',
+    bogeyPlan: 'Even slightly off, the 7i gets you close. End the round with a smooth bogey or better.'
+  }
+    ]
+  }
+];
+
 // ── Weekly Plan ────────────────────────────────────────────
 export const weeklyPlan = [
   { day: 'Monday',    shortDay: 'Mon', focus: 'Driver / irons',     location: 'Home', minutes: 15, drills: ['gate-drill', 'pump-drill'] },

@@ -54,7 +54,8 @@
       <div class="page-shell">
         <!-- Sub-navigation pills -->
         <nav class="sub-nav" aria-label="Course tips categories">
-          <button class="pill active" data-sub="situations">Situations</button>
+          <button class="pill active" data-sub="holes">Hole Guide</button>
+          <button class="pill" data-sub="situations">Situations</button>
           <button class="pill" data-sub="clubs">Club Tips</button>
           <button class="pill" data-sub="preshot">Pre-Shot</button>
           <button class="pill" data-sub="strategy">Strategy</button>
@@ -62,7 +63,8 @@
         </nav>
 
         <!-- Sub-panels rendered by JS -->
-        <div id="course-situations" class="sub-panel active"></div>
+        <div id="course-holes" class="sub-panel active"></div>
+        <div id="course-situations" class="sub-panel"></div>
         <div id="course-clubs" class="sub-panel"></div>
         <div id="course-preshot" class="sub-panel"></div>
         <div id="course-strategy" class="sub-panel"></div>
@@ -101,6 +103,7 @@
     <!-- GEAR TAB -->
     <section id="tab-gear" class="tab-panel" data-tab="gear">
       <div class="page-shell">
+        <div id="my-clubs-root"></div>
         <div id="gear-grid"></div>
         <div id="yard-diagram-root"></div>
       </div>

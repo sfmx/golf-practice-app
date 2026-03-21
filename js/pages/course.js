@@ -2,13 +2,14 @@
    COURSE — On-course tips tab (situations, clubs, pre-shot,
             strategy, personal notes)
    ============================================================ */
-import { situationalTips, clubReminders, preShotRoutine, courseManagement } from '../data.js';
-import { loadNotes, saveNotes, esc } from '../storage.js';
+import { situationalTips, clubReminders, preShotRoutine, courseManagement, courses, defaultClubDistances } from '../data.js';
+import { loadNotes, saveNotes, loadClubDistances, esc } from '../storage.js';
 
 const CHEVRON = `<svg class="chevron-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 const CHECK_SVG = `<svg class="preshot-step__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
 
 export function initCourse() {
+  renderHoleGuide();
   renderSituations();
   renderClubs();
   renderPreShot();
@@ -40,6 +41,188 @@ function initSubNav() {
     if (sub === 'notes') fab.classList.remove('hidden');
     else fab.classList.add('hidden');
   });
+}
+
+/* ── Hole Guide ─────────────────────────────────────────── */
+let _selectedCourseId = null;
+
+function getClubDistances() {
+  return loadClubDistances() || defaultClubDistances;
+}
+
+function renderHoleGuide() {
+  const el = document.getElementById('course-holes');
+  if (_selectedCourseId) {
+    renderCourseDetail(el, _selectedCourseId);
+  } else {
+    renderCourseList(el);
+  }
+}
+
+function renderCourseList(el) {
+  el.innerHTML = `
+    <div class="section-header">
+      <div class="eyebrow">On the Course</div>
+      <h2>Hole Guide</h2>
+      <p class="section-copy">Choose a course to see your hole-by-hole approach plan.</p>
+    </div>
+    <div class="course-select-grid">
+      ${courses.map(c => `
+        <button class="course-select-card card card--accent" data-course-id="${c.id}">
+          <div class="course-select-card__icon">⛳</div>
+          <div class="course-select-card__info">
+            <span class="course-select-card__name">${esc(c.name)}</span>
+            <span class="course-select-card__detail">${esc(c.tees)} Tees · Par ${c.par} · ${c.totalDistance}m</span>
+            ${c.location ? `<span class="course-select-card__location">${esc(c.location)}</span>` : ''}
+          </div>
+          <svg class="course-select-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      `).join('')}
+    </div>
+  `;
+
+  el.addEventListener('click', e => {
+    const card = e.target.closest('[data-course-id]');
+    if (!card) return;
+    _selectedCourseId = card.dataset.courseId;
+    renderHoleGuide();
+  });
+}
+
+function renderCourseDetail(el, courseId) {
+  const course = courses.find(c => c.id === courseId);
+  if (!course) { _selectedCourseId = null; renderCourseList(el); return; }
+
+  const clubs = getClubDistances();
+  const distNote = 'Distances from your My Clubs settings in the Gear tab. Update them as you improve!';
+
+  const legend = clubs.map(c =>
+    `<span class="club-dist-chip"><strong>${esc(c.club)}</strong> ${c.distance}m</span>`
+  ).join('');
+
+  el.innerHTML = `
+    <button class="back-btn" id="hole-guide-back">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      All Courses
+    </button>
+    <div class="section-header">
+      <div class="eyebrow">${esc(course.name)} — ${esc(course.tees)} Tees</div>
+      <h2>Hole-by-Hole Guide</h2>
+      <p class="section-copy">Par ${course.par} · ${course.totalDistance}m · Slope ${course.slope}</p>
+    </div>
+    <div class="club-dist-legend">
+      ${legend}
+    </div>
+    <div class="club-dist-note">
+      💡 ${esc(distNote)}
+    </div>
+    <div class="hole-guide-grid">
+      ${course.holes.map(h => {
+        const lastRemaining = h.shots[h.shots.length - 1]?.remaining ?? 0;
+        const needsChip = lastRemaining > 5;
+        let shotNum = 0;
+
+        const clubShotsHtml = h.shots.map((s, i) => {
+          shotNum++;
+          const isLast = i === h.shots.length - 1;
+          return `
+            <div class="hole-shot">
+              <div class="hole-shot__num">${shotNum}</div>
+              <div class="hole-shot__info">
+                <span class="hole-shot__club">${esc(s.club)}</span>
+                <span class="hole-shot__carry">${s.carry}m</span>
+              </div>
+              <div class="hole-shot__remaining">
+                ${isLast && !needsChip ? '<span class="hole-shot__on">On green ✓</span>' : `${s.remaining}m left`}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const chipHtml = needsChip ? (() => {
+          shotNum++;
+          return `
+            <div class="hole-shot hole-shot--short">
+              <div class="hole-shot__num">${shotNum}</div>
+              <div class="hole-shot__info">
+                <span class="hole-shot__club">Chip</span>
+                <span class="hole-shot__carry">${lastRemaining}m</span>
+              </div>
+              <div class="hole-shot__remaining"><span class="hole-shot__on">On green ✓</span></div>
+            </div>
+          `;
+        })() : '';
+
+        const putt1Num = ++shotNum;
+        const putt2Num = ++shotNum;
+        const puttsHtml = `
+          <div class="hole-shot hole-shot--putt">
+            <div class="hole-shot__num">${putt1Num}</div>
+            <div class="hole-shot__info">
+              <span class="hole-shot__club">Putt</span>
+            </div>
+            <div class="hole-shot__remaining">Lag close</div>
+          </div>
+          <div class="hole-shot hole-shot--putt">
+            <div class="hole-shot__num">${putt2Num}</div>
+            <div class="hole-shot__info">
+              <span class="hole-shot__club">Putt</span>
+            </div>
+            <div class="hole-shot__remaining">In the hole ⛳</div>
+          </div>
+        `;
+
+        const estimatedStrokes = shotNum;
+        const scoreDiff = estimatedStrokes - h.par;
+        const scoreName = scoreDiff <= -2 ? 'Eagle chance' : scoreDiff === -1 ? 'Birdie chance' : scoreDiff === 0 ? 'Par target' : scoreDiff === 1 ? 'Bogey target' : `+${scoreDiff} target`;
+
+        return `
+          <div class="card card--expandable card--accent hole-card" data-id="hole-${h.hole}">
+            <div class="card__header">
+              <div class="hole-card__header-left">
+                <div class="hole-card__number">${h.hole}</div>
+                <div class="hole-card__meta">
+                  <span class="hole-card__par">Par ${h.par}</span>
+                  <span class="hole-card__dist">${h.distance}m</span>
+                  <span class="hole-card__idx">HI ${h.index}</span>
+                </div>
+              </div>
+              <div class="hole-card__header-right">
+                <span class="hole-card__shots-badge">${esc(scoreName)}</span>
+                ${CHEVRON}
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="hole-shots-plan">
+                ${clubShotsHtml}
+                ${chipHtml}
+                ${puttsHtml}
+              </div>
+              <div class="hole-strategy">
+                <h4>📋 Strategy</h4>
+                <p>${esc(h.strategy)}</p>
+              </div>
+              <div class="hole-tip">
+                <h4>💡 Tip</h4>
+                <p>${esc(h.tip)}</p>
+              </div>
+              <div class="hole-bogey">
+                <h4>🎯 ${esc(scoreName)}</h4>
+                <p>${esc(h.bogeyPlan)}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  el.querySelector('#hole-guide-back').addEventListener('click', () => {
+    _selectedCourseId = null;
+    renderHoleGuide();
+  });
+
+  addExpandListeners(el);
 }
 
 /* ── Situational Tips ───────────────────────────────────── */
