@@ -100,6 +100,21 @@ function renderCourseDetail(el, courseId) {
     `<span class="club-dist-chip"><strong>${esc(c.club)}</strong> ${c.distance}m</span>`
   ).join('');
 
+  // Pre-compute total score target
+  let totalTarget = 0;
+  let frontTarget = 0;
+  let backTarget = 0;
+  course.holes.forEach(h => {
+    const lastRem = h.shots[h.shots.length - 1]?.remaining ?? 0;
+    const strokes = h.shots.length + (lastRem > 5 ? 1 : 0) + 2;
+    totalTarget += strokes;
+    if (h.hole <= 9) frontTarget += strokes;
+    else backTarget += strokes;
+  });
+  const frontPar = course.holes.filter(h => h.hole <= 9).reduce((s, h) => s + h.par, 0);
+  const backPar = course.holes.filter(h => h.hole > 9).reduce((s, h) => s + h.par, 0);
+  const overPar = totalTarget - course.par;
+
   el.innerHTML = `
     <button class="back-btn" id="hole-guide-back">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -109,6 +124,26 @@ function renderCourseDetail(el, courseId) {
       <div class="eyebrow">${esc(course.name)} — ${esc(course.tees)} Tees</div>
       <h2>Hole-by-Hole Guide</h2>
       <p class="section-copy">Par ${course.par} · ${course.totalDistance}m · Slope ${course.slope}</p>
+    </div>
+    <div class="score-target-card">
+      <div class="score-target-card__main">
+        <div class="score-target-card__number">${totalTarget}</div>
+        <div class="score-target-card__label">Score Target</div>
+        <div class="score-target-card__over">+${overPar} over par</div>
+      </div>
+      <div class="score-target-card__split">
+        <div class="score-target-card__nine">
+          <span class="score-target-card__nine-label">Front 9</span>
+          <span class="score-target-card__nine-val">${frontTarget}</span>
+          <span class="score-target-card__nine-par">par ${frontPar}</span>
+        </div>
+        <div class="score-target-card__divider"></div>
+        <div class="score-target-card__nine">
+          <span class="score-target-card__nine-label">Back 9</span>
+          <span class="score-target-card__nine-val">${backTarget}</span>
+          <span class="score-target-card__nine-par">par ${backPar}</span>
+        </div>
+      </div>
     </div>
     <div class="club-dist-legend">
       ${legend}

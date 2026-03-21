@@ -59,6 +59,48 @@
   transform: translateX(2px); color: var(--accent);
 }
 
+/* Score target card */
+.score-target-card {
+  background: linear-gradient(135deg, var(--accent) 0%, #2ecc71 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  margin-bottom: var(--sp-4);
+  text-align: center;
+}
+.score-target-card__main {
+  margin-bottom: var(--sp-4);
+}
+.score-target-card__number {
+  font-size: 3rem; font-weight: 800; line-height: 1;
+}
+.score-target-card__label {
+  font-size: .8125rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .08em; opacity: .85; margin-top: var(--sp-1);
+}
+.score-target-card__over {
+  font-size: .875rem; font-weight: 500; opacity: .9; margin-top: var(--sp-1);
+}
+.score-target-card__split {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-5);
+}
+.score-target-card__nine {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.score-target-card__nine-label {
+  font-size: .6875rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .06em; opacity: .75;
+}
+.score-target-card__nine-val {
+  font-size: 1.5rem; font-weight: 700;
+}
+.score-target-card__nine-par {
+  font-size: .75rem; opacity: .7;
+}
+.score-target-card__divider {
+  width: 1px; height: 40px; background: rgba(255,255,255,.3);
+}
+
 /* Club distance legend */
 .club-dist-legend {
   display: flex; flex-wrap: wrap; gap: var(--sp-2);
